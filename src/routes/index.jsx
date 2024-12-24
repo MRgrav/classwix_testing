@@ -1,22 +1,17 @@
-import { Motion } from '@motionone/solid';
-import { useNavigate } from '@solidjs/router';
-import { createEffect, lazy, Suspense } from 'solid-js';
-import { createSignal, onMount } from 'solid-js';
-import AndroidPromoSection from '~/components/LandingPage/AndroidPromoSection';
-import WhyChooseUs from '~/components/LandingPage/WhyChooseSection';
+import { createSignal, onMount, Suspense } from "solid-js";
+import AndroidPromoSection from "~/components/LandingPage/AndroidPromoSection";
+import BenefitsSection from "~/components/LandingPage/BenefitsSection";
+import CategorySection from "~/components/LandingPage/CategorySection";
+import FaqSection from "~/components/LandingPage/FaqSection";
+import FeaturedFunction from "~/components/LandingPage/FeaturedFunctionSection";
+import FeedbackSection from "~/components/LandingPage/FeedbackSection";
+import HeroSection from "~/components/LandingPage/HeroSection";
+import InstructorsSection from "~/components/LandingPage/InstructorSection";
+import PartnerSection from "~/components/LandingPage/PartnerSection";
+import StatSection from "~/components/LandingPage/StatSection";
+import SupportSection from "~/components/LandingPage/SupportSection";
+import WhyChooseUsSection from "~/components/LandingPage/WhyChooseSection";
 
-// Lazy load all sections
-const HeroSection = lazy(() => import('~/components/LandingPage/HeroSection'));
-const PartnerSection = lazy(() => import('~/components/LandingPage/PartnerSection'));
-const FeaturedFunction = lazy(() => import('~/components/LandingPage/FeaturedFunctionSection'));
-const CategorySection = lazy(() => import('~/components/LandingPage/CategorySection'));
-const LatestCourseSection = lazy(() => import('~/components/LandingPage/LatestCourseSection'));
-const StatSection = lazy(() => import('~/components/LandingPage/StatSection'));
-const InstructorsSection = lazy(() => import('~/components/LandingPage/InstructorSection'));
-const FeedbackSection = lazy(() => import('~/components/LandingPage/FeedbackSection'));
-const Button = lazy(() => import('~/components/Button'));
-
-// Reusable Lazy Loading Component
 const LazySection = (props) => {
   const [isVisible, setIsVisible] = createSignal(false);
   let sectionRef = null;
@@ -50,25 +45,12 @@ const LazySection = (props) => {
   );
 };
 
-// const navigate = useNavigate()
-
-export default function Home() {
-  const navigate = useNavigate();
-
-  createEffect(() => {
-    navigate("/offer");
-  })
+export default function index() {
   return (
-    <div class="snap-scroll min-h-screen bg-[#0e019f1d]">
-      {/* Hero Section - Always visible */}
-      <Suspense>
+    <div class="min-h-screen">
         <HeroSection />
-      </Suspense>
 
-      {/* Lazy Loaded Sections */}
-      <LazySection>
-        <PartnerSection />
-      </LazySection>
+        {/* <DynamicBenefits /> */}
 
       <LazySection threshold={0.2}>
         <FeaturedFunction />
@@ -78,31 +60,45 @@ export default function Home() {
         <CategorySection />
       </LazySection>
 
-      <LazySection>
-        <LatestCourseSection />
-      </LazySection>
+        {/* <LazySection threshold={0.3} >
+          <PlansSection />
+        </LazySection> */}
 
-      <LazySection threshold={0.4}>
-        <StatSection />
-      </LazySection>
+        {/* <Suspense >
+          <LatestCourseSection />
+        </Suspense> */}
 
-      <LazySection threshold={0.4}>
-        <InstructorsSection />
-      </LazySection>
+        
+        <LazySection threshold={0.6} >
+          <StatSection />
+        </LazySection>
+        <LazySection threshold={0.1} >
+          <BenefitsSection />
+        </LazySection>
 
-      {/* CTA Section */}
-      <LazySection threshold={0.4}>
-        <AndroidPromoSection />
-      </LazySection>
+          {/* support team */}
+        <LazySection threshold={0.4} >
+          <SupportSection />
+        </LazySection>
 
-      {/* Why Choose Us Section */}
-      <LazySection threshold={0.5}>
-        <WhyChooseUs />
-      </LazySection>
-
-      <LazySection threshold={0.4}>
-        <FeedbackSection />
-      </LazySection>
+        <LazySection threshold={0.2} >
+          <InstructorsSection />
+        </LazySection>
+        <LazySection >
+          <AndroidPromoSection />
+        </LazySection>
+        <LazySection >
+          <WhyChooseUsSection />
+        </LazySection>
+        <LazySection threshold={0.2} >
+          <FeedbackSection />
+        </LazySection>
+        <LazySection >
+          <PartnerSection />
+        </LazySection>
+        <LazySection >
+          <FaqSection />
+        </LazySection>
     </div>
-  );
+  )
 }

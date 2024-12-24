@@ -1,18 +1,19 @@
 // NotificationManager.jsx
-import { createContext, createSignal, For, Show, useContext } from 'solid-js';
+import { createContext, createSignal, For, useContext } from 'solid-js';
 import Toast from './Toast';
-import Modal from './Modal';
+// import Modal from './Modal';
 
 // Create a context to manage toast functionality globally
-const ToastContext = createContext();
+// const ToastContext = createContext();
+const PopSolidContext = createContext();
 
-export function useToast() {
-  return useContext(ToastContext);
+export function usePopSolid() {
+  return useContext(PopSolidContext);
 }
 
 export default function PopSolidManager (props) {
   const [toasts, setToasts] = createSignal([]);
-  const [modals, setModals] = createSignal([]);
+  // const [modal, setModal] = createSignal(null);
 
   const addToast = (type="info" ,message="Hello", duration=3570) => {
     const id = Date.now();
@@ -26,25 +27,32 @@ export default function PopSolidManager (props) {
       }, duration);
   };
 
-  
-
   const removeToast = (id) => {
     setToasts((prev) => prev.filter((toast) => toast.id !== id));
   };
 
-//   const addModal = (title, message) => {
-//     setModals((prev) => [
-//       ...prev,
-//       { id: Date.now(), title, message },
-//     ]);
-//   };
+  // const addModal = (type='info', title = 'hello', message = 'classwix') => {
+  //   console.log(modal())
+  //   setModal({ type, title, message });
+  // };  
 
-//   const removeModal = (id) => {
-//     setModals((prev) => prev.filter((modal) => modal.id !== id));
-//   };
+  // const removeModal = () => {
+  //   setModal(null);
+  // };
 
   return (
-    <ToastContext.Provider value={{ addToast }}>
+    <PopSolidContext.Provider value={{ addToast }}>
+
+      {/* Render Modals */}
+      {/* <Show when={modal()} >
+        <Modal
+          type={modal().type}
+          title={modal().title}
+          message={modal().message}
+          onClose={removeModal}
+        />
+      </Show> */}
+
       {/* Render Toasts */}
       {props.children}
       <div class='fixed top-0 right-0 p-3 z-50'>
@@ -60,23 +68,6 @@ export default function PopSolidManager (props) {
             )}
         </For>
       </div>
-
-      {/* Render Modals */}
-      {/* {modals().map((modal) => (
-        <Modal
-          key={modal.id}
-          id={modal.id}
-          title={modal.title}
-          message={modal.message}
-          onClose={removeModal}
-        />
-      ))} */}
-      {/* <Show when={modal} >
-        <Modal
-          title={modal.title}
-          message={modal.message}
-        />
-      </Show> */}
-    </ToastContext.Provider>
+    </PopSolidContext.Provider>
   );
 };

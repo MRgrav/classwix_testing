@@ -1,15 +1,16 @@
 import { createSignal, For, Show } from 'solid-js';
-import { HiSolidArrowRight, HiSolidBars3, HiSolidBell, HiSolidXMark } from 'solid-icons/hi';
+import { HiSolidAcademicCap, HiSolidArrowRight, HiSolidBars3, HiSolidBell, HiSolidChevronRight, HiSolidXMark } from 'solid-icons/hi';
 import Button from './Button';
-import { A } from '@solidjs/router';
+import { A, useNavigate } from '@solidjs/router';
 import Social from './Social';
+// import { isAuthenticated } from '~/store/store';
 
 const routes = [
   { label: 'Home', href: '/' },
   { label: 'Courses', href: '/courses' },
   { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },
-  { label: 'Pricing', href: '/pricing' }
+  // { label: 'Pricing', href: '/pricing' }
 ];
 
 const Navbar = () => {
@@ -47,17 +48,17 @@ const Navbar = () => {
               
             </nav>
             <div class='flex flex-col border-t-2 py-12 mt-12'>
-              {/* <A href='/login' class='px-4 py-1 mb-2 text-center font-semibold text-sm rounded-md hover:scale-95 border border-blue-800 bg-blue-50 text-blue-700'>
+              <a href='/login' class='px-4 py-1 mb-2 text-center font-semibold text-sm rounded-md hover:scale-95 border border-blue-800 bg-blue-50 text-blue-700'>
                 Signin
-              </A>
-              <A href='/#' class='px-4 py-1 text-center font-semibold text-sm rounded-md hover:scale-95 borer border-blue-500 bg-blue-700 text-white'>
+              </a>
+              <a href='/#' class='px-4 py-1 text-center font-semibold text-sm rounded-md hover:scale-95 borer border-blue-500 bg-blue-700 text-white'>
                 Signup
-              </A> */}
+              </a>
               <button class='mb-4 cursor-pointer z-50 mt-6' onClick={toggleMenu}>
-                <A href='/book-a-trial' className="px-6 rounded-md flex py-2 bg-gradient-to-tr from-blue-300 to-blue-400 text-blue-800 hover:from-blue-700 hover:to-blue-500 hover:text-white border border-blue-100 shadow-md hover:scale-95 shadow-blue-800 font-semibold">
+                <a href='/book-a-trial' className="px-6 rounded-md flex py-2 bg-gradient-to-tr from-blue-300 to-blue-400 text-blue-800 hover:from-blue-700 hover:to-blue-500 hover:text-white border border-blue-100 shadow-md hover:scale-95 shadow-blue-800 font-semibold">
                   Book a trial
                   <HiSolidArrowRight class='font-bold my-auto ml-2' />
-                </A>
+                </a>
               </button>
             </div>
             <div class='mt-auto mb-14 botom-0 mx-auto border-t-2 py-6'>
@@ -67,23 +68,41 @@ const Navbar = () => {
         </Show>
 
         <div class="flex items-center gap-x-4">
-          <a href="/" class="flex items-center gap-x-2">
+          <A href="/" class="flex items-center gap-x-2">
             {/* <h1 class="text-xl font-bold">EduSQL</h1> */}
             <img src="/mains/color-wide.webp" alt="" class='min-h-8 h-8 min-w-42 w-42 px-2' />
-          </a>
+          </A>
         </div>
 
-        <nav class="mx-6 items-center space-x-4 lg:space-x-6 hidden md:block">
+        <nav class="mx-6 items-center space-x-4 lg:space-x-6 hidden md:flex">
           <For each={routes}>
             {(route) => (
-              <a
+              <A
                 href={route.href}
                 class="text-sm font-medium transition-colors hover:text-[#7034a1]"
               >
                 {route.label}
-              </a>
+              </A>
             )}
           </For>
+
+          <div class='relative w-fit group text-sm font-medium transition-colors hover:text-[#7034a1]' >
+            Pricing
+            <ul class='absolute bg-zinc-100 text-sm shadow rounded w-fit ms-5 text-nowrap hidden group-hover:block'>
+              <li class="px-1 py-1 hover:bg-blue-200">
+                <A href='/pricing/academics' class="ps-2 text-black hover:text-indigo-700 flex items-center gap-2 px-3 py-1">
+                  <HiSolidAcademicCap />
+                  Academics Pricing
+                </A>
+              </li>
+              <li class="px-1 py-1 hover:bg-blue-200">
+                <A href='/pricing/musics' class="ps-2 text-black hover:text-indigo-700 flex items-center gap-2 px-3 py-1">
+                  <HiSolidAcademicCap />
+                  Musics Pricing
+                </A>
+              </li>
+            </ul>
+          </div>
         </nav>
 
         <div class="ml-auto flex items-center gap-x-4">
@@ -97,19 +116,20 @@ const Navbar = () => {
           {/* <Button className="bg-blue-700 hover:bg-blue-800/90 text-white hidden font-semibold sm:block">
             Sign In
           </Button> */}
-          <div class='hidden md:flex '>
-            {/* <A href='/login' class='px-4 py-1.5 font-semibold text-sm rounded-s-lg hover:scale-95 border border-blue-800 bg-blue-50 text-blue-700'>
-              Signin
-            </A>
-            <A href='/#' class='px-4 py-1.5 font-semibold text-sm rounded-e-lg hover:scale-95 borer border-blue-500 bg-blue-700 text-white'>
-              Signup
-            </A> */}
-            <button class='mb-4 cursor-pointer z-50 mt-6'>
+          <div class='hidden md:flex p-1'>
+            {/* <button class='cursor-pointer z-50'>
               <A href='/book-a-trial' className="px-6 rounded-md flex py-1.5 bg-gradient-to-tr from-blue-800 to-blue-600 text-blue-100 hover:from-blue-700 hover:to-blue-500 hover:text-white border border-blue-100 shadow-md hover:scale-95 shadow-blue-800 font-semibold">
                 Book a trial
-                {/* <HiSolidArrowRight class='font-bold my-auto ml-2' /> */}
               </A>
-            </button>
+            </button> */}
+            <div class='grid grid-cols-2'>
+              <A href='/signin' class='px-4 py-1.5 font-semibold text-sm rounded-s-lg hover:scale-95 border border-blue-800 bg-blue-50 text-blue-700'>
+                Signin
+              </A>
+              <A href='/' class='px-4 py-1.5 font-semibold text-sm rounded-e-lg hover:scale-95 borer border-blue-500 bg-blue-700 text-white'>
+                Signup
+              </A>
+            </div>
           </div>
         </div>
       </div>
