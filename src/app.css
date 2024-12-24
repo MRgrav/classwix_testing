@@ -1,0 +1,171 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background-rgb: 214, 219, 220;
+  --foreground-rgb: 0, 0, 0;
+  --purple: #6833FF;
+  --dark-purple: #4c1ad4;
+  --light-blue: #cfbdff;
+  --orange: #ff8200;
+  --dark-blue: #00008B;
+  --gray: #969696;
+}
+
+/* @media (prefers-color-scheme: light) {
+  :root {
+    --background-rgb: 0, 0, 0;
+    --foreground-rgb: 255, 255, 255;
+    --purple: #7034a1;
+    --dark-purple: #481d70;
+    --light-blue: #b3defa;
+    --orange: #ff8200;
+    --dark-blue: #00008B;
+    --gray: #969696;
+  }
+} */
+
+body {
+  background: rgb(var(--background-rgb));
+  color: rgb(var(--foreground-rgb));
+  font-family: 'Roboto', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.font-open-sans {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.font-roboto {
+  font-family: 'Roboto', sans-serif;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 271 51% 42%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 271 51% 42%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 271 51% 42%;
+    --radius: 0.5rem;
+  }
+}
+
+.hero-section {
+  background: #4e2bff;
+  box-shadow: 0px 8px 28px -9px rgba(0,0,0,0.45);
+  position: relative;
+  overflow: hidden;
+}
+
+.wave {
+  position: absolute;
+  width: 900px;
+  height: 900px;
+  opacity: 0.1;
+  left: -80px;
+  top: -740px;
+  margin-left: 0%;
+  margin-top: 0%;
+  background: linear-gradient(744deg,rgb(126, 139, 255),rgb(195, 218, 255) 20%,rgb(20, 169, 255));
+}
+
+
+/* .wave:nth-child(2), */
+.wave:nth-child(2) {
+  top: -650px;
+}
+
+.hero-playing .wave {
+  border-radius: 20% 25% 16% 16% / 17% 32% 30% 30%;
+  animation: wave 120s infinite linear;
+}
+
+.wave {
+  border-radius: 20% 30% 60% 20% / 10% 40% 20% 36%;
+  animation: wave 10s infinite linear;
+}
+
+.hero-playing .wave:nth-child(2) {
+  animation-duration: 140s;
+}
+
+.wave:nth-child(2) {
+  animation-duration: 600s;
+}
+
+/* .hero-playing .wave:nth-child(3) {
+  animation-duration: 40s;
+}
+
+.wave:nth-child(3) {
+  animation-duration: 240s;
+} */
+
+@keyframes wave {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animo-rotate {
+  rotate: 70deg;
+  scale: 150%;
+  animation: smooth-rotate 7s linear infinite;
+}
+.animo-rotate:last-child {
+  rotate: 185deg;
+  scale: 125%;
+  animation: smooth-rotate 15s linear infinite;
+}
+
+
+@keyframes smooth-rotate {
+  0% {
+    transform: rotate(0deg);  /* Starting at 0 degrees */
+  }
+  100% {
+    transform: rotate(360deg);  /* Complete a full 360 degree rotation */
+  }
+}
+
+.snap-scroll {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
+
+.snap-scroll > * {
+  scroll-snap-align: start;
+}
+
+.fade-enter-active,
+.fade-exit-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter,
+.fade-exit-to {
+  opacity: 0;
+}
