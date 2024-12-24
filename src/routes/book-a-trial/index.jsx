@@ -2,7 +2,7 @@ import { createSignal, createEffect, For } from "solid-js";
 import { selectCourse } from "~/data/selectCourse";
 import { addresses } from "~/data/addresses";
 import axios from "axios";
-import { useToast } from "~/components/PopSolid/PopSolidManager";
+import { usePopSolid } from "~/components/PopSolid/PopSolidManager";
 
 export default function BookTrialForm() {
     const [formData, setFormData] = createSignal({
@@ -52,7 +52,7 @@ export default function BookTrialForm() {
         return [];
     };
 
-    const { addToast } = useToast()
+    const { addToast } = usePopSolid()
 
 
     const handleSubmit = async (e) => {
