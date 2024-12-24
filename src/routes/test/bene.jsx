@@ -1,23 +1,16 @@
 import { HiOutlineCheck, HiOutlineCheckCircle, HiOutlineXMark, HiSolidCheckCircle, HiSolidPhone, HiSolidQrCode, HiSolidUserGroup } from "solid-icons/hi";
-import DialogCard from "~/components/DialogCard";
-import Modal from "~/components/PopSolid/Modal";
-import { useToast } from "~/components/PopSolid/PopSolidManager";
+import { usePopSolid } from "~/components/PopSolid/PopSolidManager";
 
 
 
 export default function bene() {
-    const { addToast } = useToast();
+    const { addToast } = usePopSolid();
 
     const handleTs = () => {
         addToast('warning', 'This is a success message!');
     }
   return (
     <section class="px-8 md:px-12 lg:px-40 py-12 mt-32">
-        <DialogCard key={1} />
-        <DialogCard key={2} />
-        {/* <Modal /> */}
-        {/* <Toast  message="hello" title="Success" status="warning"/> */}
-        {/* <Modal message="hello" title="Success" status="warning" /> */}
         <button class="z-50 top-[90vh] bg-red-600" onClick={()=>handleTs()} >click</button>
 
         <div class="flex justify-around flex-wrap bg-blue-300 mb-4">
